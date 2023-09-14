@@ -2,6 +2,7 @@ package com.krafttech.tests;
 
 import com.krafttech.utilities.App;
 import com.krafttech.utilities.Device;
+import com.krafttech.utilities.Driver;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 
-public class Test_03 {
+public class Test_04 {
 
    AppiumDriver<MobileElement> driver;
    AppiumDriverLocalService service;
@@ -23,24 +24,9 @@ public class Test_03 {
     @Test
     public void test1() throws InterruptedException, MalformedURLException {
 
-        service=new AppiumServiceBuilder().withIPAddress("127.0.0.1") //service terminaldeki appiummu burdan açmak için ayrıca terminalden açmama gerek kalmıyor.
-               // .usingPort(4723)
-                .usingAnyFreePort()
-                .build();
-        service.clearOutPutStreams();
-        service.start();
+        Driver.runAppiumService();
+        driver=Driver.getDriver(Device.Pixel2,App.ApiDemos);
 
-        DesiredCapabilities capabilities=new DesiredCapabilities();
-        capabilities.setCapability("appium:udid", device.udid);
-        capabilities.setCapability("appium:version", device.version);
-        capabilities.setCapability("appium:deviceName",device.deviceName);
-        capabilities.setCapability("platformName", device.platformName);
-
-        capabilities.setCapability("appium:appPackage", app.appPackage);
-        capabilities.setCapability("appium:appActivity", app.appActivity);
-
-        //driver'ı ayarlayalım
-        driver = new AndroidDriver<MobileElement>(service.getUrl(), capabilities);//service in oluşturduğu URL aldık
 
         // driver.findElement(By.xpath("//*[@text='Continue']")).click();
         clickWithText("Continue");

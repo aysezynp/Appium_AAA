@@ -1,5 +1,7 @@
 package com.krafttech.tests;
 
+import com.krafttech.utilities.App;
+import com.krafttech.utilities.Device;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -10,12 +12,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
-public class Test_02 {
+public class Test_03 {
 
    AppiumDriver<MobileElement> driver;
    AppiumDriverLocalService service;
+   Device device=Device.Pixel2;
+   App app=App.ApiDemos;
 
     @Test
     public void test1() throws InterruptedException, MalformedURLException {
@@ -28,13 +31,13 @@ public class Test_02 {
         service.start();
 
         DesiredCapabilities capabilities=new DesiredCapabilities();
-        capabilities.setCapability("appium:udid", "emulator-5554");
-        capabilities.setCapability("appium:version", "11.0");
-        capabilities.setCapability("appium:deviceName", "Pixel 2");
-        capabilities.setCapability("platformName", "Android");
+        capabilities.setCapability("appium:udid", device.udid);
+        capabilities.setCapability("appium:version", device.version);
+        capabilities.setCapability("appium:deviceName",device.deviceName);
+        capabilities.setCapability("platformName", device.platformName);
 
-        capabilities.setCapability("appium:appPackage", "com.touchboarder.android.api.demos");
-        capabilities.setCapability("appium:appActivity", "com.touchboarder.androidapidemos.MainActivity");
+        capabilities.setCapability("appium:appPackage", app.appPackage);
+        capabilities.setCapability("appium:appActivity", app.appActivity);
 
         //driver'ı ayarlayalım
         driver = new AndroidDriver<MobileElement>(service.getUrl(), capabilities);//service in oluşturduğu URL aldık

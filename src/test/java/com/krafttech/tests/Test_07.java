@@ -1,47 +1,55 @@
 package com.krafttech.tests;
 
 import com.krafttech.TestBase;
-import com.krafttech.utilities.App;
-import com.krafttech.utilities.Device;
-import com.krafttech.utilities.Driver;
 import com.krafttech.utilities.Utils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 
-public class Test_06 extends TestBase {
+public class Test_07 extends TestBase {
 
 
-
-    By lTamam=By.id("android:id/button1");
+    By lTamam = By.id("android:id/button1");
+    By LwebView = By.xpath("//*[@text='WebView']");
 
     @Test
     public void test1() throws InterruptedException, MalformedURLException {
 
 
         // driver.findElement(By.xpath("//*[@text='Continue']")).click();
-        clickWithText("Continue");
+        Utils.clickWithText("Continue");
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(lTamam));
-        clickWithText("OK");
-        clickWithText("OK");
-        clickWithText("API Demos");
-        clickWithText("Accessibility");
-
-
+        Utils.clickWithText("OK");
+        Utils.clickWithText("OK");
+        Utils.clickWithText("API Demos");
+        Utils.clickWithText("Accessibility");
+        driver.navigate().back();
+        Utils.clickWithText("Views");
+        Utils.swipeV(.8, .2);//yukarı çek aşağı in
+        Utils.swipeV(.2, .8);//2 den 8 e aşağı çeker ama yukarı
 
     }
-    
-    void clickWithText(String text){
-        driver.findElement(By.xpath("//*[@text='"+text+"']")).click();
+
+    @Test
+    public void test2() throws InterruptedException, MalformedURLException {
+
+
+        Utils.clickWithText("Continue");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lTamam));
+        Utils.clickWithText("OK");
+        Utils.clickWithText("OK");
+        Utils.clickWithText("API Demos");
+        Utils.clickWithText("Accessibility");
+        driver.navigate().back();
+        Utils.clickWithText("Views");
+        Utils.swipeUntil(LwebView,.8,.2);
+        Utils.clickWithText("WebView");
+
     }
 
- }
 
-
-
+}
